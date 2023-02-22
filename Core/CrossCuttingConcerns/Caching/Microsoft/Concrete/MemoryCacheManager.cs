@@ -1,11 +1,11 @@
-﻿using CoreLayer.CrossCuttingConcerns.Caching.Abstract;
+﻿using CoreLayer.CrossCuttingConcerns.Caching.Microsoft.Abstract;
 using Microsoft.Extensions.Caching.Memory;
 
-namespace CoreLayer.CrossCuttingConcerns.Caching.Concrete
+namespace CoreLayer.CrossCuttingConcerns.Caching.Microsoft.Concrete
 {
     public class MemoryCacheManager : ICacheManager
     {
-        IMemoryCache _memoryCache;
+        private readonly IMemoryCache _memoryCache;
         public MemoryCacheManager(IMemoryCache memoryCache)
         {
             _memoryCache = memoryCache;
@@ -13,7 +13,7 @@ namespace CoreLayer.CrossCuttingConcerns.Caching.Concrete
 
         public void Add(string key, object value, int duration)
         {
-            _memoryCache.Set(key, value, TimeSpan.FromMinutes(duration));
+            _memoryCache.Set(key, value, DateTime.Now.AddMinutes(duration));
         }
 
         public object Get(string key)

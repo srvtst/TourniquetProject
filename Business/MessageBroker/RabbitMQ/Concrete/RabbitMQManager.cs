@@ -6,7 +6,7 @@ namespace BusinessLayer.MessageBroker.RabbitMQ.Concrete
 {
     public class RabbitMQManager : IRabbitMQService
     {
-        IConfiguration _configuration { get; }
+        private readonly IConfiguration _configuration;
         private RabbitConfiguration _rabbitConfiguration;
         public RabbitMQManager(IConfiguration configuration)
         {

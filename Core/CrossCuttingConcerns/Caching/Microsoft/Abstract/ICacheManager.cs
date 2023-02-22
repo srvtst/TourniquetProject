@@ -1,6 +1,4 @@
-﻿using Castle.DynamicProxy;
-
-namespace CoreLayer.CrossCuttingConcerns.Caching.Abstract
+﻿namespace CoreLayer.CrossCuttingConcerns.Caching.Microsoft.Abstract
 {
     public interface ICacheManager
     {

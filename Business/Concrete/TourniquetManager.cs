@@ -1,13 +1,12 @@
 ﻿using BusinessLayer.Abstract;
 using BusinessLayer.Contants;
-using BusinessLayer.Mailing.Abstract;
 using BusinessLayer.MessageBroker.RabbitMQ.Abstract;
-using CoreLayer.CrossCuttingConcerns.Caching.Abstract;
+using CoreLayer.CrossCuttingConcerns.Caching.DistributedCache.Abstract;
 using CoreLayer.Utilities.Results;
 using DataAccessLayer.Abstract;
 using EntitiesLayer.Concrete;
 using Microsoft.Extensions.Logging;
-using System.Reflection;
+using System.Text.Json;
 
 namespace BusinessLayer.Concrete
 {
@@ -15,18 +14,18 @@ namespace BusinessLayer.Concrete
     {
         private readonly ITourniquetDal _tourniquetDal;
         private readonly ILogger<TourniquetManager> _logger;
-        private readonly ICacheManager _cacheManager;
         private readonly IPublisherService _publisherService;
-        private readonly IMailSender _mailSender;
         private readonly IConsumerService _consumerService;
-        public TourniquetManager(ITourniquetDal tourniquetDal, ILogger<TourniquetManager> logger, ICacheManager cacheManager, IPublisherService publisherService
-            , IMailSender mailSender, IConsumerService consumerService)
+        private readonly IRedisCacheService _redisService;
+        string key = "name";
+        int db = 1;
+        public TourniquetManager(ITourniquetDal tourniquetDal, ILogger<TourniquetManager> logger, IRedisCacheService redisCacheService
+            , IPublisherService publisherService, IConsumerService consumerService)
         {
             _tourniquetDal = tourniquetDal;
             _logger = logger;
+            _redisService = redisCacheService;
             _publisherService = publisherService;
-            _mailSender = mailSender;
-            _cacheManager = cacheManager;
             _consumerService = consumerService;
         }
 
@@ -50,22 +49,11 @@ namespace BusinessLayer.Concrete
 
         public IDataResult<List<Tourniquet>> GetAll()
         {
-            var method = MethodBase.GetCurrentMethod();
-            var methodName = string.Format($"{method.ReflectedType.FullName}.{method.Name}");
-            var parameters = method.GetParameters().Select(o => o?.ToString() ?? "<<null>>");
-            var key = $"{methodName}({parameters})";
-            if (!_cacheManager.IsThere(key))
-            {
-                var result = _tourniquetDal.GetAll();
-                _cacheManager.Add(key, result, 40);
-                _logger.LogInformation("Veri tabanından listeleme yapıldı.");
-                return new SuccessDataResult<List<Tourniquet>>(result, Message.TourniquetGetAll);
-            }
-            else
-            {
-                _logger.LogInformation("Cache ten listeleme yapıldı.");
-                return new SuccessDataResult<List<Tourniquet>>(_cacheManager.Get<List<Tourniquet>>(key));
-            }
+            var result = _tourniquetDal.GetAll();
+            _logger.LogInformation("Veri Tabanından Listeleme Yapıldı.");
+            var jsonResult = JsonSerializer.Serialize(result);
+            _redisService.SetCache(key, jsonResult, db, 2);
+            return new SuccessDataResult<List<Tourniquet>>(result, Message.TourniquetGetAll);
         }
 
         public IDataResult<Tourniquet> GetByTourniquet(int id)
