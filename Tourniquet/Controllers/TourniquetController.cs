@@ -28,14 +28,14 @@ namespace TourniquetAPI.Controllers
             return Ok(result);
         }
 
-        [HttpGet("{dateTime}")]
+        [HttpGet("getDayTourniquet")]
         public IActionResult GetDayTourniquet(DateTime dateTime)
         {
             var result = _tourniquetService.GetDayTourniquet(dateTime);
             return Ok(result);
         }
 
-        [HttpGet("getMonth")]
+        [HttpGet("getMonthTourniquet")]
         public IActionResult GetMonthTourniquet(DateTime dateTime)
         {
             var result = _tourniquetService.GetMonthTourniquet(dateTime);
@@ -49,7 +49,7 @@ namespace TourniquetAPI.Controllers
             return Ok(result);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("getByTourniquet")]
         public IActionResult GetByTourniquet(int id)
         {
             var result = _tourniquetService.GetByTourniquet(id);

@@ -6,7 +6,8 @@ using CoreLayer.Utilities.Results;
 using DataAccessLayer.Abstract;
 using EntitiesLayer.Concrete;
 using Microsoft.Extensions.Logging;
-using System.Text.Json;
+using Newtonsoft.Json;
+using System.Reflection;
 
 namespace BusinessLayer.Concrete
 {
@@ -17,8 +18,6 @@ namespace BusinessLayer.Concrete
         private readonly IPublisherService _publisherService;
         private readonly IConsumerService _consumerService;
         private readonly IRedisCacheService _redisService;
-        string key = "name";
-        int db = 1;
         public TourniquetManager(ITourniquetDal tourniquetDal, ILogger<TourniquetManager> logger, IRedisCacheService redisCacheService
             , IPublisherService publisherService, IConsumerService consumerService)
         {
@@ -49,17 +48,42 @@ namespace BusinessLayer.Concrete
 
         public IDataResult<List<Tourniquet>> GetAll()
         {
-            var result = _tourniquetDal.GetAll();
-            _logger.LogInformation("Veri Tabanından Listeleme Yapıldı.");
-            var jsonResult = JsonSerializer.Serialize(result);
-            _redisService.SetCache(key, jsonResult, db, 2);
-            return new SuccessDataResult<List<Tourniquet>>(result, Message.TourniquetGetAll);
+            string methodName = string.Format($"{MethodBase.GetCurrentMethod().Name}");
+            string key = $"{methodName}()";
+            if (!_redisService.IsKeyDb(key, 0))
+            {
+                var DbResult = _tourniquetDal.GetAll();
+                _logger.LogInformation("Veri Tabanından Listeleme Yapıldı.");
+                var jsonResult = JsonConvert.SerializeObject(DbResult);
+                _redisService.SetCache(key, jsonResult, 0, 3);
+                return new SuccessDataResult<List<Tourniquet>>(DbResult, Message.TourniquetGetAll);
+            }
+            else
+            {
+                var cacheResult = _redisService.GetListCache<Tourniquet>(key, 0);
+                _logger.LogInformation($"{key} Bilgisine göre Cacheten Listeleme Yapıldı.");
+                return new SuccessDataResult<List<Tourniquet>>(cacheResult);
+            }
         }
 
         public IDataResult<Tourniquet> GetByTourniquet(int id)
         {
-            var result = _tourniquetDal.GetByTourniquet(id);
-            return new SuccessDataResult<Tourniquet>(result);
+            string methodName = string.Format($"{MethodBase.GetCurrentMethod().Name}");
+            string key = $"{methodName}()";
+            if (!_redisService.IsKeyDb(key, 0))
+            {
+                var DbResult = _tourniquetDal.GetByTourniquet(id);
+                _logger.LogInformation("Veri Tabanından Listeleme Yapıldı.");
+                var jsonResult = JsonConvert.SerializeObject(DbResult);
+                _redisService.SetCache(key, jsonResult, 0, 3);
+                return new SuccessDataResult<Tourniquet>(DbResult);
+            }
+            else
+            {
+                var cacheResult = _redisService.GetCache<Tourniquet>(key, 0);
+                _logger.LogInformation($"{key} Bilgisine göre Cacheten Listeleme Yapıldı.");
+                return new SuccessDataResult<Tourniquet>(cacheResult);
+            }
         }
 
         public IDataResult<List<Tourniquet>> GetDayTourniquet(DateTime dateTime)
