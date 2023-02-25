@@ -1,11 +1,11 @@
 ﻿using CoreLayer.CrossCuttingConcerns.Caching.DistributedCache.Abstract;
-using Newtonsoft.Json;
+using System.Text.Json;
 
 namespace CoreLayer.CrossCuttingConcerns.Caching.DistributedCache.Concrete
 {
     public class RedisCacheManager : IRedisCacheService
     {
-        IRedisCacheConfiguration _redisConfiguration;
+        private readonly IRedisCacheConfiguration _redisConfiguration;
 
         public RedisCacheManager(IRedisCacheConfiguration redisConfiguration)
         {
@@ -32,12 +32,12 @@ namespace CoreLayer.CrossCuttingConcerns.Caching.DistributedCache.Concrete
 
         public List<T> GetListCache<T>(string key, int db)
         {
-            List<T> result = new List<T>();
+            var result = new List<T>();
             var database = _redisConfiguration.Get(db);
             var cacheList = database.ListRange(key);
             foreach (var item in cacheList)
             {
-                result = JsonConvert.DeserializeObject<List<T>>(item.ToString());
+                result = JsonSerializer.Deserialize<List<T>>(item);
             }
             return result;
         }
@@ -46,13 +46,15 @@ namespace CoreLayer.CrossCuttingConcerns.Caching.DistributedCache.Concrete
         {
             var database = _redisConfiguration.Get(db);
             var cacheList = database.ListRange(key).First();
-            var result = JsonConvert.DeserializeObject<T>(cacheList.ToString());
+            var result = JsonSerializer.Deserialize<T>(cacheList.ToString());
             return result;
         }
 
-        public void RemoveCache(string key, int db)
+        public void RemoveCache<T>(string key, int db)
         {
-            throw new NotImplementedException();
+            var database = _redisConfiguration.Get(db);
+            var productList = GetListCache<T>(key, db);
+            database.ListRemove(key, JsonSerializer.Serialize(productList));
         }
     }
 }

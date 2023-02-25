@@ -6,8 +6,8 @@ using CoreLayer.Utilities.Results;
 using DataAccessLayer.Abstract;
 using EntitiesLayer.Concrete;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
 using System.Reflection;
+using System.Text.Json;
 
 namespace BusinessLayer.Concrete
 {
@@ -18,6 +18,7 @@ namespace BusinessLayer.Concrete
         private readonly IPublisherService _publisherService;
         private readonly IConsumerService _consumerService;
         private readonly IRedisCacheService _redisService;
+        string key = "Tourniquet";
         public TourniquetManager(ITourniquetDal tourniquetDal, ILogger<TourniquetManager> logger, IRedisCacheService redisCacheService
             , IPublisherService publisherService, IConsumerService consumerService)
         {
@@ -30,6 +31,10 @@ namespace BusinessLayer.Concrete
 
         public IResult Entry(Tourniquet tourniquet)
         {
+            if (_redisService.IsKeyDb(key, 0))
+            {
+                _redisService.RemoveCache<Tourniquet>(key, 0);
+            }
             _tourniquetDal.Entry(tourniquet);
             _publisherService.Publish(tourniquet);
             _consumerService.Start();
@@ -48,14 +53,14 @@ namespace BusinessLayer.Concrete
 
         public IDataResult<List<Tourniquet>> GetAll()
         {
-            string methodName = string.Format($"{MethodBase.GetCurrentMethod().Name}");
-            string key = $"{methodName}()";
+            //string methodName = string.Format($"{MethodBase.GetCurrentMethod().Name}");
+            //string key = $"{methodName}()";
             if (!_redisService.IsKeyDb(key, 0))
             {
                 var DbResult = _tourniquetDal.GetAll();
                 _logger.LogInformation("Veri Tabanından Listeleme Yapıldı.");
-                var jsonResult = JsonConvert.SerializeObject(DbResult);
-                _redisService.SetCache(key, jsonResult, 0, 3);
+                var jsonResult = JsonSerializer.Serialize(DbResult);
+                _redisService.SetCache(key, jsonResult, 0, 250);
                 return new SuccessDataResult<List<Tourniquet>>(DbResult, Message.TourniquetGetAll);
             }
             else
@@ -68,13 +73,13 @@ namespace BusinessLayer.Concrete
 
         public IDataResult<Tourniquet> GetByTourniquet(int id)
         {
-            string methodName = string.Format($"{MethodBase.GetCurrentMethod().Name}");
-            string key = $"{methodName}()";
+            //string methodName = string.Format($"{MethodBase.GetCurrentMethod().Name}");
+            //string key = $"{methodName}()";
             if (!_redisService.IsKeyDb(key, 0))
             {
                 var DbResult = _tourniquetDal.GetByTourniquet(id);
                 _logger.LogInformation("Veri Tabanından Listeleme Yapıldı.");
-                var jsonResult = JsonConvert.SerializeObject(DbResult);
+                var jsonResult = JsonSerializer.Serialize(DbResult);
                 _redisService.SetCache(key, jsonResult, 0, 3);
                 return new SuccessDataResult<Tourniquet>(DbResult);
             }
