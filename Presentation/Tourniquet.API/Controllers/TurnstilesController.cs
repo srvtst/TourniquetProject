@@ -3,8 +3,10 @@ using Microsoft.AspNetCore.Mvc;
 using Tourniquet.Application.Features.Tourniquet.Commands.Create;
 using Tourniquet.Application.Features.Tourniquet.Commands.Update;
 using Tourniquet.Application.Features.Tourniquet.Queries.GetAllTourniquet;
+using Tourniquet.Application.Features.Tourniquet.Queries.GetByIdTourniquet;
 using Tourniquet.Application.Features.Tourniquet.Queries.GetDayTourniquet;
 using Tourniquet.Application.Features.Tourniquet.Queries.GetMonthTourniquet;
+using Tourniquet.Application.Features.Tourniquet.Queries.GetQueueTourniquet;
 
 namespace Tourniquet.API.Controllers
 {
@@ -25,6 +27,13 @@ namespace Tourniquet.API.Controllers
             return Ok(response);
         }
 
+        [HttpGet("getById")]
+        public async Task<IActionResult> GetById([FromQuery] GetByIdTurnstileQueryCommand getByIdTurnstileQueryCommand)
+        {
+            var response = await _mediator.Send(getByIdTurnstileQueryCommand);
+            return Ok(response);
+        }
+
         [HttpGet("getDay")]
         public async Task<IActionResult> GetDayTurnstile([FromQuery] GetDayTurnstileQueryCommand getDayTurnstileQueryCommand)
         {
@@ -36,6 +45,13 @@ namespace Tourniquet.API.Controllers
         public async Task<IActionResult> GetMontTurnstile([FromQuery] GetMonthTurnstileQueryCommand getMonthTurnstileQueryCommand)
         {
             var response = await _mediator.Send(getMonthTurnstileQueryCommand);
+            return Ok(response);
+        }
+
+        [HttpGet("getQueue")]
+        public async Task<IActionResult> GetQueueTurnstile([FromQuery] GetQueueTurnstileQueryCommand getQueueTurnstileQueryCommand)
+        {
+            var response = await _mediator.Send(getQueueTurnstileQueryCommand);
             return Ok(response);
         }
 

@@ -16,7 +16,7 @@ namespace Tourniquet.Application.Features.Tourniquet.Queries.GetMonthTourniquet
 
         public async Task<IList<GetMonthTurnstileQueryResponse>> Handle(GetMonthTurnstileQueryCommand request, CancellationToken cancellationToken)
         {
-            var monthTurnstile = _turnstileReadRepository.GetWhere(x=>x.DateOfEntry.Month == request.DateTime.Month || x.DateOfEntry.Month == request.DateTime.Month).ToList();
+            var monthTurnstile = _turnstileReadRepository.GetWhere(x=>x.DateOfEntry.Month == request.DateTime.Month || x.ExitDate.Month == request.DateTime.Month).ToList();
             var response = _mapper.Map<IList<GetMonthTurnstileQueryResponse>>(monthTurnstile);
             return response;
         }

@@ -19,7 +19,7 @@ namespace Tourniquet.Application.Features.Commands.Update
         public async Task<UpdatedPersonResponse> Handle(UpdatedPersonCommand request, CancellationToken cancellationToken)
         {
             Person mappedPerson = _mapper.Map<Person>(request);
-            byte[] passwordHash, passwordSalt;
+            string passwordHash, passwordSalt;
             HashingHelper.CreatePasswordHash(request.Password, out passwordHash, out passwordSalt);
             mappedPerson.PasswordHash = passwordHash;
             mappedPerson.PasswordSalt = passwordSalt;

@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Tourniquet.Persistence.Context;
@@ -11,9 +12,11 @@ using Tourniquet.Persistence.Context;
 namespace Tourniquet.Persistence.Migrations
 {
     [DbContext(typeof(TurnstileDbContext))]
-    partial class TurnstileDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230307192431_initial")]
+    partial class initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

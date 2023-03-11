@@ -26,7 +26,7 @@ namespace Tourniquet.Application.Features.Auth.Commands.Register
         {
             Person mappedPerson = _mapper.Map<Person>(request.PersonCreateAndRegister);
 
-            byte[] passwordSalt, passwordHash;
+            string passwordSalt, passwordHash;
 
             HashingHelper.CreatePasswordHash(request.PersonCreateAndRegister.Password, out passwordHash, out passwordSalt);
 

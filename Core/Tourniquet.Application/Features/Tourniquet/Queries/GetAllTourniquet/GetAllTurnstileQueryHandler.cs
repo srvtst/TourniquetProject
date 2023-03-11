@@ -1,23 +1,25 @@
 ﻿using AutoMapper;
 using MediatR;
-using Tourniquet.Application.Repositories.Tourniquet;
+using Tourniquet.Application.Repositories.Redis;
+using Tourniquet.Domain;
 
 namespace Tourniquet.Application.Features.Tourniquet.Queries.GetAllTourniquet
 {
     public class GetAllTurnstileQueryHandler : IRequestHandler<GetAllTurnstileQueryCommand, IList<GetAllTurnstileQueryResponse>>
     {
-        private ITurnstileReadRepository _turnstileReadRepository;
+        private const string key = "TurnstileKey";
+        private IRedisReadRepository _redisReadRepository;
         private IMapper _mapper;
 
-        public GetAllTurnstileQueryHandler(ITurnstileReadRepository turnstileReadRepository, IMapper mapper)
+        public GetAllTurnstileQueryHandler(IRedisReadRepository redisReadRepository,IMapper mapper)
         {
-            _turnstileReadRepository = turnstileReadRepository;
+            _redisReadRepository = redisReadRepository;
             _mapper = mapper;
         }
 
         public async Task<IList<GetAllTurnstileQueryResponse>> Handle(GetAllTurnstileQueryCommand request, CancellationToken cancellationToken)
         {
-            var turnstiles = _turnstileReadRepository.GetAll().ToList();
+            var turnstiles = await _redisReadRepository.GetAll<Turnstile>(key, 1);
             var response = _mapper.Map<IList<GetAllTurnstileQueryResponse>>(turnstiles);
             return response;
         }

@@ -1,8 +1,8 @@
 ﻿using Tourniquet.Domain.Enums;
 
-namespace Tourniquet.Application.Features.Tourniquet.Queries.GetDayTourniquet
+namespace Tourniquet.Application.Features.Tourniquet.Queries.GetQueueTourniquet
 {
-    public class GetDayTurnstileQueryResponse
+    public class GetQueueTurnstileQueryResponse
     {
         public int Id { get; set; }
         public int PersonId { get; set; }

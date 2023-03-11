@@ -1,6 +1,6 @@
 ﻿using Tourniquet.Domain.Enums;
 
-namespace Tourniquet.Application.Dtos
+namespace Tourniquet.Application.Dtos.Auth
 {
     public class PersonCreateAndRegister
     {

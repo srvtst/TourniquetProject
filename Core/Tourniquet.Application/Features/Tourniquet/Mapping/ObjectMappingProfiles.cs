@@ -2,8 +2,10 @@
 using Tourniquet.Application.Features.Tourniquet.Commands.Create;
 using Tourniquet.Application.Features.Tourniquet.Commands.Update;
 using Tourniquet.Application.Features.Tourniquet.Queries.GetAllTourniquet;
+using Tourniquet.Application.Features.Tourniquet.Queries.GetByIdTourniquet;
 using Tourniquet.Application.Features.Tourniquet.Queries.GetDayTourniquet;
 using Tourniquet.Application.Features.Tourniquet.Queries.GetMonthTourniquet;
+using Tourniquet.Application.Features.Tourniquet.Queries.GetQueueTourniquet;
 using Tourniquet.Domain;
 
 namespace Tourniquet.Application.Features.Tourniquet.Mapping
@@ -19,6 +21,8 @@ namespace Tourniquet.Application.Features.Tourniquet.Mapping
             CreateMap<Turnstile, GetDayTurnstileQueryResponse>().ReverseMap();
             CreateMap<Turnstile, GetAllTurnstileQueryResponse>().ReverseMap();
             CreateMap<Turnstile, GetMonthTurnstileQueryResponse>().ReverseMap();
+            CreateMap<Turnstile, GetQueueTurnstileQueryResponse>().ReverseMap();
+            CreateMap<Turnstile, GetByIdTurnstileQueryResponse>().ReverseMap();
         }
     }
 }

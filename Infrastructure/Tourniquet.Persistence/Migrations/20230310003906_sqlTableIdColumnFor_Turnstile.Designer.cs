@@ -12,8 +12,8 @@ using Tourniquet.Persistence.Context;
 namespace Tourniquet.Persistence.Migrations
 {
     [DbContext(typeof(TurnstileDbContext))]
-    [Migration("20230305142834_initial")]
-    partial class initial
+    [Migration("20230310003906_sqlTableIdColumnFor_Turnstile")]
+    partial class sqlTableIdColumnFor_Turnstile
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -48,13 +48,13 @@ namespace Tourniquet.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<byte[]>("PasswordHash")
+                    b.Property<string>("PasswordHash")
                         .IsRequired()
-                        .HasColumnType("bytea");
+                        .HasColumnType("text");
 
-                    b.Property<byte[]>("PasswordSalt")
+                    b.Property<string>("PasswordSalt")
                         .IsRequired()
-                        .HasColumnType("bytea");
+                        .HasColumnType("text");
 
                     b.Property<string>("PhoneNumber")
                         .IsRequired()

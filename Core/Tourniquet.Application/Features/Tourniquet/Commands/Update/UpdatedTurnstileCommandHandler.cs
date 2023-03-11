@@ -20,7 +20,16 @@ namespace Tourniquet.Application.Features.Tourniquet.Commands.Update
         public async Task<UpdatedTurnstileResponse> Handle(UpdatedTurnstileCommand request, CancellationToken cancellationToken)
         {
             var newTurnstile = _turnstileRead.Get(x => x.Id == request.Id);
-            var mappedTurnstile = _mapper.Map<Turnstile>(newTurnstile);
+            var turnstile = new Turnstile()
+            {
+                Id = request.Id,
+                Queue = request.Queue,
+                ExitDate = request.ExitDate,
+                PersonId = newTurnstile.PersonId,
+                DateOfEntry = request.DateOfEntry,
+                Status = Domain.Enums.Status.Inactive
+            };
+            var mappedTurnstile = _mapper.Map<Turnstile>(turnstile);
             var updatedTurnstile = await _turnstileWrite.UpdateAsync(mappedTurnstile);
             UpdatedTurnstileResponse response = _mapper.Map<UpdatedTurnstileResponse>(updatedTurnstile);
             return response;

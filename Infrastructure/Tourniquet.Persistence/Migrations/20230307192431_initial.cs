@@ -24,8 +24,8 @@ namespace Tourniquet.Persistence.Migrations
                     PhoneNumber = table.Column<string>(type: "text", nullable: false),
                     Status = table.Column<int>(type: "integer", nullable: false),
                     Gender = table.Column<int>(type: "integer", nullable: false),
-                    PasswordHash = table.Column<byte[]>(type: "bytea", nullable: false),
-                    PasswordSalt = table.Column<byte[]>(type: "bytea", nullable: false)
+                    PasswordHash = table.Column<string>(type: "text", nullable: false),
+                    PasswordSalt = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -59,7 +59,7 @@ namespace Tourniquet.Persistence.Migrations
                 name: "IX_Turnstiles_PersonId",
                 table: "Turnstiles",
                 column: "PersonId",
-                unique: true);
+                unique: false);
         }
 
         /// <inheritdoc />

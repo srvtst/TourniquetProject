@@ -12,6 +12,7 @@
 		</PackageReference>
 		<PackageReference Include="Npgsql" Version="7.0.2" />
 		<PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="7.0.3" />
+		<PackageReference Include="StackExchange.Redis" Version="2.6.96" />
 	</ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\..\Core\Tourniquet.Application\Tourniquet.Application.csproj" />

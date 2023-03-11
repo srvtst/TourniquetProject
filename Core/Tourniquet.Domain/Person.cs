@@ -11,8 +11,8 @@ namespace Tourniquet.Domain
         public string PhoneNumber { get; set; }
         public Status Status { get; set; }
         public Gender Gender { get; set; }
-        public byte[] PasswordHash { get; set; }
-        public byte[] PasswordSalt { get; set; }
+        public string PasswordHash { get; set; }
+        public string PasswordSalt { get; set; }
         public Turnstile? Turnstile { get; set; }
     }
 }
