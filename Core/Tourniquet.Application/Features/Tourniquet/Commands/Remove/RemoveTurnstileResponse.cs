@@ -2,6 +2,6 @@
 {
     public class RemoveTurnstileResponse
     {
-        public string Message => "Turnikeden giriş çıkış bilgisi başarılı olarak sistemden silinmiştir.";
+        public string Message { get; set; }
     }
 }

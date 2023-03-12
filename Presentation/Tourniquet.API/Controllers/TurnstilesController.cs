@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Tourniquet.Application.Features.Tourniquet.Commands.Create;
+using Tourniquet.Application.Features.Tourniquet.Commands.Remove;
 using Tourniquet.Application.Features.Tourniquet.Commands.Update;
 using Tourniquet.Application.Features.Tourniquet.Queries.GetAllTourniquet;
 using Tourniquet.Application.Features.Tourniquet.Queries.GetByIdTourniquet;
@@ -66,6 +67,13 @@ namespace Tourniquet.API.Controllers
         public async Task<IActionResult> Exit([FromBody] UpdatedTurnstileCommand updatedTurnstileCommand)
         {
             UpdatedTurnstileResponse response = await _mediator.Send(updatedTurnstileCommand);
+            return Ok(response);
+        }
+
+        [HttpDelete]
+        public async Task<IActionResult> Delete([FromBody] RemoveTurnstileCommand removeTurnstileCommand)
+        {
+            RemoveTurnstileResponse response = await _mediator.Send(removeTurnstileCommand);
             return Ok(response);
         }
     }

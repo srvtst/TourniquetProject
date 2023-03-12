@@ -15,7 +15,7 @@ namespace Tourniquet.Persistence.Repositories
             Context = context;
         }
 
-        public IQueryable<T> GetAll(Expression<Func<T, bool>>? filter = null, int page = 0, int pageSize = 10)
+        public IQueryable<T> GetAll(Expression<Func<T, bool>>? filter = null, int page = 0, int pageSize = 100)
         {
             return Context.Set<T>().AsNoTracking().AsQueryable().Skip(page).Take(pageSize);
         }

@@ -13,7 +13,7 @@ namespace Tourniquet.Application.Features.Tourniquet.Commands.Create
     {
         private const string key = "TurnstileKey";
         private IMapper _mapper;
-        private ITurnstileWriteRepository _turnstileWrite;
+        private ITurnstileWriteRepository _turnstileWriteRepository;
         private IPublisherService _publisherService;
         private IConsumerService _consumerService;
         private ILogger<CreatedTurnstileCommandHandler> _logger;
@@ -23,17 +23,17 @@ namespace Tourniquet.Application.Features.Tourniquet.Commands.Create
             , IConsumerService consumerService, ILogger<CreatedTurnstileCommandHandler> logger , IRedisWriteRepository redisWriteRepository)
         {
             _mapper = mapper;
-            _turnstileWrite = turnstileWrite;
+            _logger = logger;
+            _turnstileWriteRepository = turnstileWrite;
             _publisherService = publisherService;
             _consumerService = consumerService;
-            _logger = logger;
             _redisWriteRepository = redisWriteRepository;
         }
 
         public async Task<CreatedTurnstileResponse> Handle(CreatedTurnstileCommand request, CancellationToken cancellationToken)
         {
             var mappedTurnstile = _mapper.Map<Turnstile>(request);
-            var createdTrunstile = await _turnstileWrite.AddAsync(mappedTurnstile);
+            var createdTrunstile = await _turnstileWriteRepository.AddAsync(mappedTurnstile);
             var cache = JsonSerializer.Serialize(createdTrunstile);
             await _redisWriteRepository.Add(key, createdTrunstile.Id, cache, 1);
             _logger.LogInformation("Turnikeden giriş yapılmıştır.");

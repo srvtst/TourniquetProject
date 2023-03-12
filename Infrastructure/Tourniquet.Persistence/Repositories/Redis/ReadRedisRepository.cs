@@ -39,17 +39,13 @@ namespace Tourniquet.Persistence.Repositories.Redis
         {
             var database = _redisService.Get(db);
             var result = new List<T>();
-            if (CacheKeyExists(key, db))
+            var cache = await database.HashGetAllAsync(key);
+            foreach (var item in cache.ToList())
             {
-                var cache = await database.HashGetAllAsync(key);
-                foreach (var item in cache.ToList())
-                {
-                    var cacheItem = JsonSerializer.Deserialize<T>(item.Value);
-                    result.Add(cacheItem);
-                }
-                return result;
+                var cacheItem = JsonSerializer.Deserialize<T>(item.Value);
+                result.Add(cacheItem);
             }
-            throw new Exception("redisten gelmedi");
+            return result;
         }
     }
 }
