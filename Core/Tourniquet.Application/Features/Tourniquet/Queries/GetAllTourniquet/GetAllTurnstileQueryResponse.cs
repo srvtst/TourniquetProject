@@ -1,14 +1,12 @@
-﻿using Tourniquet.Domain.Enums;
+﻿using Tourniquet.Application.Dtos.Tourniquet;
+using Tourniquet.Domain.Enums;
 
 namespace Tourniquet.Application.Features.Tourniquet.Queries.GetAllTourniquet
 {
     public class GetAllTurnstileQueryResponse
     {
-        public int Id { get; set; }
-        public int Queue { get; set; }
-        public int PersonId { get; set; }
-        public Status Status { get; set; }
-        public DateTime DateOfEnty { get; set; }
-        public DateTime ExitDate { get; set; }
+        public IList<TurnstileList> TurnstileLists { get; set; }
+        public int Count { get; set; }
+        public string Message => "Turnikeden giriş yapan kişilere ait kayıtlar listelenmiştir.";
     }
 }

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Tourniquet.Application.Dtos.Tourniquet;
 using Tourniquet.Application.Features.Tourniquet.Commands.Create;
 using Tourniquet.Application.Features.Tourniquet.Commands.Update;
 using Tourniquet.Application.Features.Tourniquet.Queries.GetAllTourniquet;
@@ -23,6 +24,7 @@ namespace Tourniquet.Application.Features.Tourniquet.Mapping
             CreateMap<Turnstile, GetMonthTurnstileQueryResponse>().ReverseMap();
             CreateMap<Turnstile, GetQueueTurnstileQueryResponse>().ReverseMap();
             CreateMap<Turnstile, GetByIdTurnstileQueryResponse>().ReverseMap();
+            CreateMap<Turnstile, TurnstileList>().ReverseMap();
         }
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Tourniquet.Application.Features.Tourniquet.Queries.GetAllTourniquet
 {
-    public class GetAllTurnstileQueryCommand : IRequest<IList<GetAllTurnstileQueryResponse>>
+    public class GetAllTurnstileQueryCommand : IRequest<GetAllTurnstileQueryResponse>
     {
         public int Page => 0;
         public int PageSize => 100;
