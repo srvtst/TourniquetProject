@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Tourniquet.Domain;
+using Tourniquet.Domain.Entities;
 
 namespace Tourniquet.Persistence.Context
 {

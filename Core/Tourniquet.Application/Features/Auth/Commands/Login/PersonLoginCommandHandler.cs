@@ -2,7 +2,7 @@
 using Tourniquet.Application.Features.Auth.Rules;
 using Tourniquet.Application.Repositories;
 using Tourniquet.Application.Services.Auth;
-using Tourniquet.Domain;
+using Tourniquet.Domain.Entities;
 
 namespace Tourniquet.Application.Features.Auth.Commands.Login
 {

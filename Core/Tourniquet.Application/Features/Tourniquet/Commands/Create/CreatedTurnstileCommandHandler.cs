@@ -5,7 +5,7 @@ using System.Text.Json;
 using Tourniquet.Application.Repositories.Redis;
 using Tourniquet.Application.Repositories.Tourniquet;
 using Tourniquet.Application.Services.RabbitMQ;
-using Tourniquet.Domain;
+using Tourniquet.Domain.Entities;
 
 namespace Tourniquet.Application.Features.Tourniquet.Commands.Create
 {

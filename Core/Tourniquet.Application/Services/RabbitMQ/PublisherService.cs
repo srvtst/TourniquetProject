@@ -1,8 +1,8 @@
 ﻿using Microsoft.Extensions.Logging;
 using System.Text.Json;
 using System.Text;
-using Tourniquet.Domain;
 using RabbitMQ.Client;
+using Tourniquet.Domain.Entities;
 
 namespace Tourniquet.Application.Services.RabbitMQ
 {

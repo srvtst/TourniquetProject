@@ -3,7 +3,7 @@ using MediatR;
 using System.Text.Json;
 using Tourniquet.Application.Repositories.Redis;
 using Tourniquet.Application.Repositories.Tourniquet;
-using Tourniquet.Domain;
+using Tourniquet.Domain.Entities;
 
 namespace Tourniquet.Application.Features.Tourniquet.Commands.Update
 {

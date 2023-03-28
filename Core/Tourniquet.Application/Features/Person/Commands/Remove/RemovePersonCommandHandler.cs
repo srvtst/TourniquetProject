@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using MediatR;
 using Tourniquet.Application.Repositories;
-using Tourniquet.Domain;
+using Tourniquet.Domain.Entities;
 
 namespace Tourniquet.Application.Features.Commands.Remove
 {

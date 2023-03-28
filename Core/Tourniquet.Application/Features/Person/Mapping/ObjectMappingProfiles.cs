@@ -5,7 +5,7 @@ using Tourniquet.Application.Features.Auth.Commands.Register;
 using Tourniquet.Application.Features.Commands.Remove;
 using Tourniquet.Application.Features.Commands.Update;
 using Tourniquet.Application.Features.Queries.GetAllPersons;
-using Tourniquet.Domain;
+using Tourniquet.Domain.Entities;
 
 namespace Tourniquet.Application.Features.Mapping
 {

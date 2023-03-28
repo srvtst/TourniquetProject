@@ -3,8 +3,7 @@ using MediatR;
 using Tourniquet.Application.Repositories;
 using Tourniquet.Application.SecurityHelper.Helpers;
 using Tourniquet.Application.Services.Auth;
-using Tourniquet.Application.Services.Mail;
-using Tourniquet.Domain;
+using Tourniquet.Domain.Entities;
 
 namespace Tourniquet.Application.Features.Auth.Commands.Register
 {
@@ -13,13 +12,11 @@ namespace Tourniquet.Application.Features.Auth.Commands.Register
         private IAuthService _authService;
         private IMapper _mapper;
         private IPersonWriteRepository _personWriteRepository;
-        private IMailSender _mailSender;
-        public PersonRegisterCommandHandler(IAuthService authService, IPersonWriteRepository personWriteRepository, IMapper mapper, IMailSender mailSender)
+        public PersonRegisterCommandHandler(IAuthService authService, IPersonWriteRepository personWriteRepository, IMapper mapper)
         {
             _authService = authService;
             _mapper = mapper;
             _personWriteRepository = personWriteRepository;
-            _mailSender = mailSender;
         }
 
         public async Task<PersonRegisterCommandResponse> Handle(PersonRegisterCommand request, CancellationToken cancellationToken)
@@ -34,8 +31,6 @@ namespace Tourniquet.Application.Features.Auth.Commands.Register
             mappedPerson.PasswordHash = passwordHash;
 
             await _personWriteRepository.AddAsync(mappedPerson);
-
-            _mailSender.SendMail(request.PersonCreateAndRegister.Email,"Hoşgeldiniz");
 
             PersonRegisterCommandResponse response = new()
             {

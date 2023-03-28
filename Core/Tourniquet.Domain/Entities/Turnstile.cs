@@ -1,7 +1,7 @@
 ﻿using Tourniquet.Domain.Common;
 using Tourniquet.Domain.Enums;
 
-namespace Tourniquet.Domain
+namespace Tourniquet.Domain.Entities
 {
     public class Turnstile : BaseEntity
     {

@@ -59,7 +59,7 @@ namespace Tourniquet.Persistence.Migrations
                 name: "IX_Turnstiles_PersonId",
                 table: "Turnstiles",
                 column: "PersonId",
-                unique: false);
+                unique: true);
         }
 
         /// <inheritdoc />

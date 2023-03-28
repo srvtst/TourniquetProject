@@ -31,7 +31,7 @@ namespace Tourniquet.Application.Services.RabbitMQ
                 channel.BasicAck(e.DeliveryTag, false);
             };
 
-           _mailSender.SendMail("servet.soysal@hotmail.com", "Consumer başarılı olarak okuma yaptı.");
+           //_mailSender.SendMail("servet.soysal@hotmail.com", "Consumer başarılı olarak okuma yaptı.");
         }
     }
 }

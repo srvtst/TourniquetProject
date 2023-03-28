@@ -7,7 +7,7 @@ using Tourniquet.Application.Features.Tourniquet.Queries.GetByIdTourniquet;
 using Tourniquet.Application.Features.Tourniquet.Queries.GetDayTourniquet;
 using Tourniquet.Application.Features.Tourniquet.Queries.GetMonthTourniquet;
 using Tourniquet.Application.Features.Tourniquet.Queries.GetQueueTourniquet;
-using Tourniquet.Domain;
+using Tourniquet.Domain.Entities;
 
 namespace Tourniquet.Application.Features.Tourniquet.Mapping
 {

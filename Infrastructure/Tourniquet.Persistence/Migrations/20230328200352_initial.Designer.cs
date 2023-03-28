@@ -12,8 +12,8 @@ using Tourniquet.Persistence.Context;
 namespace Tourniquet.Persistence.Migrations
 {
     [DbContext(typeof(TurnstileDbContext))]
-    [Migration("20230310003906_sqlTableIdColumnFor_Turnstile")]
-    partial class sqlTableIdColumnFor_Turnstile
+    [Migration("20230328200352_initial")]
+    partial class initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

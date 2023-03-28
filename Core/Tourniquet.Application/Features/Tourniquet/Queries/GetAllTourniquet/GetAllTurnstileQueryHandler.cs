@@ -4,31 +4,29 @@ using System.Text.Json;
 using Tourniquet.Application.Dtos.Tourniquet;
 using Tourniquet.Application.Repositories.Redis;
 using Tourniquet.Application.Repositories.Tourniquet;
-using Tourniquet.Domain;
+using Tourniquet.Domain.Entities;
 
 namespace Tourniquet.Application.Features.Tourniquet.Queries.GetAllTourniquet
 {
     public class GetAllTurnstileQueryHandler : IRequestHandler<GetAllTurnstileQueryCommand, GetAllTurnstileQueryResponse>
     {
+        private const string key = "TurnstileKey";
         private IMapper _mapper;
         private ITurnstileReadRepository _turnstileReadRepository;
-
-        public GetAllTurnstileQueryHandler(ITurnstileReadRepository turnstileReadRepository, IMapper mapper)
+        private IRedisReadRepository _redisReadRepository;
+        private IRedisWriteRepository _redisWriteRepository;
+        public GetAllTurnstileQueryHandler(ITurnstileReadRepository turnstileReadRepository, IMapper mapper
+            , IRedisReadRepository redisReadRepository, IRedisWriteRepository redisWriteRepository)
         {
             _turnstileReadRepository = turnstileReadRepository;
             _mapper = mapper;
+            _redisReadRepository = redisReadRepository;
+            _redisWriteRepository = redisWriteRepository;
+
         }
 
         public async Task<GetAllTurnstileQueryResponse> Handle(GetAllTurnstileQueryCommand request, CancellationToken cancellationToken)
         {
-            var turnstiles = _turnstileReadRepository.GetAll().ToList();
-            var mapped = _mapper.Map<IList<TurnstileList>>(turnstiles);
-            var response = new GetAllTurnstileQueryResponse
-            {
-                TurnstileLists = mapped,
-                Count = turnstiles.Count,
-            };
-            /*
             if (!_redisReadRepository.CacheKeyExists(key, 1))
             {
                 var listTurnstiles = _turnstileReadRepository.GetAll().ToList();
@@ -46,7 +44,7 @@ namespace Tourniquet.Application.Features.Tourniquet.Queries.GetAllTourniquet
                 TurnstileLists = mapperDto,
                 Count = turnstiles.Count
 
-            };*/
+            };
             return response;
         }
     }
