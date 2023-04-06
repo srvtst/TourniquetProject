@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Tourniquet.Application.Dtos.Tourniquet;
+using Tourniquet.Application.Configuration.Tourniquet;
 using Tourniquet.Application.Features.Tourniquet.Commands.Create;
 using Tourniquet.Application.Features.Tourniquet.Commands.Update;
 using Tourniquet.Application.Features.Tourniquet.Queries.GetAllTourniquet;

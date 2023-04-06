@@ -1,4 +1,4 @@
-﻿namespace Tourniquet.Application.Dtos.Token
+﻿namespace Tourniquet.Application.Configuration.Token
 {
     public class TokenOptions
     {

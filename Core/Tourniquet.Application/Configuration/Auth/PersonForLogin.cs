@@ -1,4 +1,4 @@
-﻿namespace Tourniquet.Application.Dtos.Auth
+﻿namespace Tourniquet.Application.Configuration.Auth
 {
     public class PersonForLogin
     {

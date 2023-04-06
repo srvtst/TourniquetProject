@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using System.IdentityModel.Tokens.Jwt;
-using Tourniquet.Application.Dtos.Token;
+using Tourniquet.Application.Configuration.Token;
 using Tourniquet.Application.Helpers.SecurityHelper;
 
 namespace Tourniquet.Application.Services.Auth

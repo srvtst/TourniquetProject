@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Tourniquet.Application.Dtos.Auth;
+using Tourniquet.Application.Configuration.Auth;
 using Tourniquet.Application.Features.Auth.Commands.Login;
 using Tourniquet.Application.Features.Auth.Commands.Register;
 using Tourniquet.Application.Features.Commands.Remove;

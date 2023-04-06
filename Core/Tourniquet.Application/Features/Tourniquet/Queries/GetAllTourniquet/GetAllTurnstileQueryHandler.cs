@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using MediatR;
 using System.Text.Json;
-using Tourniquet.Application.Dtos.Tourniquet;
+using Tourniquet.Application.Configuration.Tourniquet;
 using Tourniquet.Application.Repositories.Redis;
 using Tourniquet.Application.Repositories.Tourniquet;
 using Tourniquet.Domain.Entities;

@@ -1,4 +1,4 @@
-﻿namespace Tourniquet.Application.Dtos.Mail
+﻿namespace Tourniquet.Application.Configuration.Mail
 {
     public class SmtpConfig
     {

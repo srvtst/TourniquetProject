@@ -1,4 +1,4 @@
-﻿using Tourniquet.Application.Dtos.Token;
+﻿using Tourniquet.Application.Configuration.Token;
 
 namespace Tourniquet.Application.Features.Auth.Commands.Login
 {

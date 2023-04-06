@@ -1,4 +1,4 @@
-﻿namespace Tourniquet.Application.Dtos.Redis
+﻿namespace Tourniquet.Application.Configuration.Redis
 {
     public class RedisSettings
     {

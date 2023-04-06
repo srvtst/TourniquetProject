@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using StackExchange.Redis;
-using Tourniquet.Application.Dtos.Redis;
+using Tourniquet.Application.Configuration.Redis;
 using Tourniquet.Application.Services.Redis;
 
 namespace Tourniquet.Persistence.Repositories.Redis

@@ -1,4 +1,4 @@
-﻿namespace Tourniquet.Application.Dtos.RabbitMQ
+﻿namespace Tourniquet.Application.Configuration.RabbitMQ
 {
     public class RabbitMQConfiguration
     {

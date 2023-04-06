@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using RabbitMQ.Client;
-using Tourniquet.Application.Dtos.RabbitMQ;
+using Tourniquet.Application.Configuration.RabbitMQ;
 
 namespace Tourniquet.Application.Services.RabbitMQ
 {

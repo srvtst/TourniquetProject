@@ -1,6 +1,6 @@
 ﻿using Tourniquet.Domain.Enums;
 
-namespace Tourniquet.Application.Dtos.Tourniquet
+namespace Tourniquet.Application.Configuration.Tourniquet
 {
     public class TurnstileList
     {

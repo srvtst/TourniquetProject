@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using System.Net.Mail;
 using System.Net;
-using Tourniquet.Application.Dtos.Mail;
+using Tourniquet.Application.Configuration.Mail;
 
 namespace Tourniquet.Application.Services.Mail
 {

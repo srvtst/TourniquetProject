@@ -1,5 +1,5 @@
 ﻿using MediatR;
-using Tourniquet.Application.Dtos.Auth;
+using Tourniquet.Application.Configuration.Auth;
 
 namespace Tourniquet.Application.Features.Auth.Commands.Login
 {

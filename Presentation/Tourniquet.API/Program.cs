@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Tourniquet.Application.Dtos.Token;
+using Tourniquet.Application.Configuration.Token;
 using Tourniquet.Application.Helpers.SecurityHelper;
 using Tourniquet.Persistence;
 using Tourniquet.Application;

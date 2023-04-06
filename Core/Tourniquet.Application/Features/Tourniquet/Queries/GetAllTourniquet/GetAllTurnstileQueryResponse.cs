@@ -1,4 +1,4 @@
-﻿using Tourniquet.Application.Dtos.Tourniquet;
+﻿using Tourniquet.Application.Configuration.Tourniquet;
 using Tourniquet.Domain.Enums;
 
 namespace Tourniquet.Application.Features.Tourniquet.Queries.GetAllTourniquet
