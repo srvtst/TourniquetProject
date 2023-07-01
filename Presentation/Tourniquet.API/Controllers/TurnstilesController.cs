@@ -11,7 +11,7 @@ using Tourniquet.Application.Features.Tourniquet.Queries.GetQueueTourniquet;
 
 namespace Tourniquet.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class TurnstilesController : ControllerBase
     {
@@ -28,50 +28,50 @@ namespace Tourniquet.API.Controllers
             return Ok(response);
         }
 
-        [HttpGet("getById")]
+        [HttpGet()]
         public async Task<IActionResult> GetById([FromQuery] GetByIdTurnstileQueryCommand getByIdTurnstileQueryCommand)
         {
             var response = await _mediator.Send(getByIdTurnstileQueryCommand);
             return Ok(response);
         }
 
-        [HttpGet("getDay")]
+        [HttpGet()]
         public async Task<IActionResult> GetDayTurnstile([FromQuery] GetDayTurnstileQueryCommand getDayTurnstileQueryCommand)
         {
             var response = await _mediator.Send(getDayTurnstileQueryCommand);
             return Ok(response);
         }
 
-        [HttpGet("getMonth")]
-        public async Task<IActionResult> GetMontTurnstile([FromQuery] GetMonthTurnstileQueryCommand getMonthTurnstileQueryCommand)
+        [HttpGet()]
+        public async Task<IActionResult> GetMonthTurnstile([FromQuery] GetMonthTurnstileQueryCommand getMonthTurnstileQueryCommand)
         {
             var response = await _mediator.Send(getMonthTurnstileQueryCommand);
             return Ok(response);
         }
 
-        [HttpGet("getQueue")]
+        [HttpGet()]
         public async Task<IActionResult> GetQueueTurnstile([FromQuery] GetQueueTurnstileQueryCommand getQueueTurnstileQueryCommand)
         {
             var response = await _mediator.Send(getQueueTurnstileQueryCommand);
             return Ok(response);
         }
 
-        [HttpPost("entry")]
-        public async Task<IActionResult> Add([FromBody] CreatedTurnstileCommand createdTurnstile)
+        [HttpPost()]
+        public async Task<IActionResult> EntryTurnstile([FromBody] CreatedTurnstileCommand createdTurnstile)
         {
             CreatedTurnstileResponse response = await _mediator.Send(createdTurnstile);
             return Ok(response);
         }
 
-        [HttpPost("exit")]
-        public async Task<IActionResult> Exit([FromBody] UpdatedTurnstileCommand updatedTurnstileCommand)
+        [HttpPost()]
+        public async Task<IActionResult> ExitTurnstile([FromBody] UpdatedTurnstileCommand updatedTurnstileCommand)
         {
             UpdatedTurnstileResponse response = await _mediator.Send(updatedTurnstileCommand);
             return Ok(response);
         }
 
         [HttpDelete]
-        public async Task<IActionResult> Delete([FromBody] RemoveTurnstileCommand removeTurnstileCommand)
+        public async Task<IActionResult> DeleteTurnstile([FromBody] RemoveTurnstileCommand removeTurnstileCommand)
         {
             RemoveTurnstileResponse response = await _mediator.Send(removeTurnstileCommand);
             return Ok(response);
